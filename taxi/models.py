@@ -6,8 +6,7 @@ class Manufacturer(models.Model):
     country = models.CharField(max_length=255)
 
     def __str__(self):
-        return f"{self.name} ({self.country})"
-
+        return f"{self.name} {self.country}"
 
 class Car(models.Model):
     model = models.CharField(max_length=255)
@@ -15,11 +14,10 @@ class Car(models.Model):
     drivers = models.ManyToManyField("Driver", related_name="cars")
 
     def __str__(self):
-        return f"{self.model} - {self.manufacturer.name}"
-
+        return f"{self.manufacturer.name} {self.model}"
 
 class Driver(AbstractUser):
     license_number = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
-        return f"{self.username} ({self.license_number})"
+        return f"{self.first_name} {self.last_name} ({self.license_number})"
